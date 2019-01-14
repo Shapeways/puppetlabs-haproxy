@@ -6,7 +6,7 @@
 #
 class haproxy::params {
   # XXX: This will change to true in the next major release
-  $merge_options = false
+  $merge_options = true
 
   $service_options  = "ENABLED=1\n"  # Only used by Debian.
   $sysconfig_options = 'OPTIONS=""' #Only used by Redhat/CentOS etc

@@ -74,10 +74,10 @@ define haproxy::instance_service (
   # Create init.d or systemd files so that "service haproxy-$instance start"
   # or "systemd start haproxy-$instance" works.
   # This is not required if the standard instance is being used.
-  if ($title == 'haproxy') or ($haproxy_package == 'haproxy') {
+  if ($title == 'haproxy') {
   } else {
     $initfile = "/etc/init.d/haproxy-${title}"
-    if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '6' {
+    if ($facts['os']['name'] == 'Ubuntu') and ($facts['os']['distro']['release']['major'] == '14.04') {
 
       # init.d:
       validate_string($haproxy_init_source)
@@ -100,7 +100,7 @@ define haproxy::instance_service (
         $wrapper = "/opt/${haproxy_package}/sbin/haproxy-systemd-wrapper"
       }
 
-      $unitfile = "/usr/lib/systemd/system/haproxy-${title}.service"
+      $unitfile = "/etc/systemd/system/haproxy-${title}.service"
       file { $unitfile:
         ensure  => file,
         mode    => '0744',

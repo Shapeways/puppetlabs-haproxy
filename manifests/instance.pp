@@ -208,7 +208,7 @@ define haproxy::instance (
     merge_options    => $merge_options,
   }
   haproxy::install { $title:
-    package_name   => $package_name,
+#    package_name   => $package_name,
     package_ensure => $package_ensure,
   }
   haproxy::service { $title:
